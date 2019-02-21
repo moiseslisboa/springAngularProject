@@ -3,13 +3,30 @@ package com.globomatics.bike.models;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String name;
 	private String email;
 	private String phone;
 	private String model;
 	private String serialNumber;
 	private BigDecimal purchasePrice;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern= "MM-dd-yyyy")
 	private Date purchaseDate;
 	private boolean contact;
 	
@@ -77,4 +94,13 @@ public class Bike {
 	public void setContact(boolean contact) {
 		this.contact = contact;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
