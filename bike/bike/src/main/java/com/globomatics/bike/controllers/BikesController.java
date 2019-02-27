@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.globomatics.bike.models.Bike;
 import com.globomatics.bike.repositories.BikeRepository;
 
@@ -25,14 +26,23 @@ public class BikesController {
 	
 	@GetMapping
 	public List<Bike> list() {
-		return bikeRepository.findAll();
+		List<Bike> listOfBikes = bikeRepository.findAll();
+		return listOfBikes;
 	}
 	
 	@PostMapping
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody Bike bike) {
 		bikeRepository.save(bike);
 	}
+	
+	@PostMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void delete(@PathVariable("id") long id) {
+		bikeRepository.deleteById(id);
+	}
+	
+	
 	
 	@GetMapping("/{id}")
 	public Bike get(@PathVariable("id") long id){
