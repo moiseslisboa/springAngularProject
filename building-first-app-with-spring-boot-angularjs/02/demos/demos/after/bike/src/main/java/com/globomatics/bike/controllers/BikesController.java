@@ -20,6 +20,13 @@ import com.globomatics.bike.repositories.BikeRepository;
 @RequestMapping("/api/v1/bikes")
 public class BikesController {
 
+	
+	//TODO: Take a look at CPI Backend class an see what was done there
+	// that is interesting do do here. What are the differences? For example: 
+	// can I create a metrics framework like they did for CPI?
+	
+	
+	
 	@Autowired
 	private BikeRepository bikeRepository;
 	
@@ -38,6 +45,13 @@ public class BikesController {
 	@GetMapping("/{id}")
 	public Bike get(@PathVariable("id") long id) {
 		return bikeRepository.getOne(id);
+	}
+	
+	
+	// Just to test. Remove this latter since it is not returning any json.
+	@GetMapping("/info")
+	public String getInfo() {
+		return "This is the bike spring boot application example. \n Thanks for using it!";
 	}
 
 }
